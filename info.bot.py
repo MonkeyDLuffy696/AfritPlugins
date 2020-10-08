@@ -31,7 +31,7 @@ class InfoBot(base.BotBase):
             if base.is_do():
                 print(" Portals:", self.new_map.portals.size(),
                 "; in NAZ:", self.new_map.inNaz,
-                "; Cargo load:", self.new_map.cargo.getPercentage(),
+                      "; Cargo load:", self.new_map.cargo.getPercentage(), "%",
                 "; PET HP:", self.new_map.pet.hp.curr);
     def onHeroEntered(self):
         print("Hero ship ready.")
