@@ -952,7 +952,7 @@ class Hero(object):
     __repr__ = _swig_repr
     wallet = property(_botapi.Hero_wallet_get, _botapi.Hero_wallet_set)
     ship = property(_botapi.Hero_ship_get, _botapi.Hero_ship_set)
-    target = property(_botapi.Hero_target_get, _botapi.Hero_target_set)
+    selectedTarget = property(_botapi.Hero_selectedTarget_get, _botapi.Hero_selectedTarget_set)
     isDead = property(_botapi.Hero_isDead_get, _botapi.Hero_isDead_set)
 
     def __init__(self):

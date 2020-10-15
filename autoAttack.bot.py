@@ -14,10 +14,10 @@ class AutoAttackBot(base.BotBase):
     def onBotLoopStart(self):
         print("AutoAttack loaded.")
     def onHeroTargetUpdate(self):
-        print("Hero target changed from " + str(self.old_map.hero.target) + " to " + str(self.new_map.hero.target))
-        if self.new_map.hero.target != 0:
+        print("Hero target changed from " + str(self.old_map.hero.selectedTarget) + " to " + str(self.new_map.hero.selectedTarget))
+        if self.new_map.hero.selectedTarget != 0:
             # Attack any ship that your ship selected:
-            ship_idx = GetShipByUid(self.new_map.ships, self.new_map.hero.target);
+            ship_idx = GetShipByUid(self.new_map.ships, self.new_map.hero.selectedTarget);
             if (ship_idx < 0):
                 return
             ship = self.new_map.ships[ship_idx]
