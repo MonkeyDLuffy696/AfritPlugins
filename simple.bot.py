@@ -4,18 +4,6 @@ from botapi import *
 import random
 import time
 
-        # You can use the following member functions of self.acts to operate your ship:
-        # self.acts.moveTo(x, y)
-        # self.acts.selectShip(Ship)
-        # self.acts.attackShip(Ship)
-        # self.acts.reviveHero()
-        # self.acts.startRepair()
-        # self.acts.stopRepair()
-        # self.acts.sendKeys(keys)
-        # (only for SF) self.acts.doAction(string msg)
-        # (only for PS) self.acts.sendNotification(string msg)
-        # (only for PS) self.acts.leaveHarbour()
-
 def CreateBot():
     return SimpleBot()
 
