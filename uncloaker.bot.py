@@ -9,7 +9,7 @@ def CreateBot():
 
 class UncloakBot(base.BotBase):
     def __init__(self):
-        base.BotBase.__init__(self)
+        base.BotBase.__init__(self, 'uncloaker')
 
     def onBotLoopStart(self):
         print("Uncloak script loaded.");

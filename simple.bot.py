@@ -24,7 +24,7 @@ class SimpleBot(base.BotBase):
     _target_id = -1
 
     def __init__(self):
-        base.BotBase.__init__(self)
+        base.BotBase.__init__(self, 'simple')
 
     def onBotLoopStart(self):
         # this opens the console window. You can comment it to avoid opening

@@ -16,7 +16,7 @@ FILTER_ENEMIES = ClosestEnemyFilter()
 class InfoBot(base.BotBase):
     _init_time = time.perf_counter()
     def __init__(self):
-        base.BotBase.__init__(self)
+        base.BotBase.__init__(self, 'info')
 
     def onBotLoopStart(self):
         # this opens the console window. You can comment it to avoid opening

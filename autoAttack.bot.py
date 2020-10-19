@@ -9,7 +9,7 @@ def CreateBot():
 
 class AutoAttackBot(base.BotBase):
     def __init__(self):
-        base.BotBase.__init__(self)
+        base.BotBase.__init__(self, 'autoAttack')
 
     def onBotLoopStart(self):
         print("AutoAttack loaded.")

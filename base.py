@@ -1,3 +1,4 @@
+import json
 from botapi import *
 
 ##### DO NOT CHANGE THIS FILE             #####
@@ -28,6 +29,7 @@ def AddBot(bot):
 def SetActivators(ptr_activators):
     for bot in BOTS:
         bot.acts = CastActivatorsFromPointer(ptr_activators)
+        bot.updateConfig()
         bot.onBotLoopStart()
 def SetWorldData(ptr_old_map, ptr_new_map):
     fn_cast = None
@@ -67,16 +69,26 @@ def OnEvent(evt):
             bot.onHeroUpdate()
         elif evt == EventType_selectShipFailed:
             bot.onSelectShipFailed()
-            # There are more events
 
 def CreateBot():
-    return BotBase()
+    return BotBase("base")
 class BotBase:
     old_map = None
     new_map = None
     acts = None
-    def __init__(self):
-        return
+    _base_name = ""
+    _cfg = {}
+    def __init__(self, base_name):
+        self._base_name = base_name
+
+    def updateConfig(self):
+        conf = "scripts/" + self._base_name + "/config.json"
+        try:
+            with open(conf, "r") as config_raw:
+                self._cfg = json.load(config_raw)
+        except IOError:
+            print("Warning: No config file found (" + conf + ")")
+            return
 
     def onHeroUpdate(self):
         return

@@ -1,8 +1,9 @@
 ## Simple script that moves around and kills NPCs
-import base 
-from botapi import *
 import random
 import time
+import json 
+import base
+from botapi import *
 
 def CreateBot():
     return NpcKillBot()
@@ -21,11 +22,13 @@ class NpcKillBot(base.BotBase):
     _target_id = -1
 
     def __init__(self):
-        base.BotBase.__init__(self)
+        base.BotBase.__init__(self, 'npckill')
 
     def onBotLoopStart(self):
-        # this opens the console window. You can comment it to avoid opening
-        self.acts.allocateConsoleWindow()
+        if self._cfg['openConsoleWindow']:
+            # this opens the console window. You can comment it to avoid opening
+            self.acts.allocateConsoleWindow()
+            print("Console window opened.")
         print("Simple NPC killer loaded.")
 
     def random_move(self):

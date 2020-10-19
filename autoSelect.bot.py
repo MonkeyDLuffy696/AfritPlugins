@@ -15,7 +15,7 @@ FILTER_NPC = ClosestNpcFilter()
 
 class AutoSelectBot(base.BotBase):
     def __init__(self):
-        base.BotBase.__init__(self)
+        base.BotBase.__init__(self, 'autoSelect')
 
     def onBotLoopStart(self):
         print("AutoSelect loaded.");
