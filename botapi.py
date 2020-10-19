@@ -825,6 +825,9 @@ class Point(object):
     def intPoint(self):
         return _botapi.Point_intPoint(self)
 
+    def randomPosInRadius(self, radius):
+        return _botapi.Point_randomPosInRadius(self, radius)
+
     def toString(self):
         return _botapi.Point_toString(self)
 
@@ -987,6 +990,7 @@ EventType_map = _botapi.EventType_map
 EventType_wallet = _botapi.EventType_wallet
 EventType_heroStartsMoving = _botapi.EventType_heroStartsMoving
 EventType_heroStopsMoving = _botapi.EventType_heroStopsMoving
+EventType_selectNpcFailed = _botapi.EventType_selectNpcFailed
 EventType_EventType_END = _botapi.EventType_EventType_END
 class Event(object):
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")

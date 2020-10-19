@@ -65,6 +65,8 @@ def OnEvent(evt):
             bot.onHeroStopsMoving()
         elif evt == EventType_heroShip:
             bot.onHeroUpdate()
+        elif evt == EventType_selectShipFailed:
+            bot.onSelectShipFailed()
             # There are more events
 
 def CreateBot():
@@ -75,17 +77,6 @@ class BotBase:
     acts = None
     def __init__(self):
         return
-
-# You can use the following member functions of self.acts to operate your ship:
-# self.acts.moveTo(x, y)
-# self.acts.selectShip(Ship)
-# self.acts.attackShip(Ship)
-# self.acts.reviveHero()
-# self.acts.startRepair()
-# self.acts.stopRepair()
-# self.acts.sendKeys(keys)
-# (only for PS) self.acts.sendNotification(string msg)
-# (only for PS) self.acts.leaveHarbour()
 
     def onHeroUpdate(self):
         return
@@ -110,4 +101,6 @@ class BotBase:
     def onHeroStartsMoving(self):
         return
     def onHeroStopsMoving(self):
+        return
+    def onSelectShipFailed(self):
         return

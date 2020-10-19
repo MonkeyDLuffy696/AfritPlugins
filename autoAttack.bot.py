@@ -17,9 +17,8 @@ class AutoAttackBot(base.BotBase):
         print("Hero target changed from " + str(self.old_map.hero.selectedTarget) + " to " + str(self.new_map.hero.selectedTarget))
         if self.new_map.hero.selectedTarget != 0:
             # Attack any ship that your ship selected:
-            ship_idx = GetShipByUid(self.new_map.ships, self.new_map.hero.selectedTarget);
-            if (ship_idx < 0):
+            ship = GetShipByUid(self.new_map.ships, self.new_map.hero.selectedTarget);
+            if (ship is None):
                 return
-            ship = self.new_map.ships[ship_idx]
             print("Attack " + ship.serialize())
             self.acts.attackShip(ship)
