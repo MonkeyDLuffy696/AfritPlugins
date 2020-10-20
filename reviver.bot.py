@@ -1,5 +1,5 @@
 ## Revives you upon death
-import base 
+import base
 from botapi import *
 
 def CreateBot():
@@ -16,5 +16,3 @@ class ReviverBot(base.BotBase):
     def onDeath(self):
         print("Reviving...")
         self.acts.reviveHero()
-    def onHeroEntered(self):
-        print("Hero ship ready.")

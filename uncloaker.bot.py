@@ -14,9 +14,8 @@ class UncloakBot(base.BotBase):
     def onBotLoopStart(self):
         print("Uncloak script loaded.");
 
-    def onShipListUpdate(self):
+    def onTick(self):
         for ship in self.new_map.ships:
             if not ship.isNpc and ship.cloaked:
                 print("Uncloak: " + ship.name + " (", ship.x, "|", ship.y, ")")
                 self.acts.uncloakShip(ship)
-                break

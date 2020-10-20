@@ -19,8 +19,6 @@ class InfoBot(base.BotBase):
         base.BotBase.__init__(self, 'info')
 
     def onBotLoopStart(self):
-        # this opens the console window. You can comment it to avoid opening
-        self.acts.allocateConsoleWindow()
         print("Info printer loaded.")
 
     def onHeroUpdate(self):

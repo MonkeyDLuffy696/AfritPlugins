@@ -7,23 +7,24 @@ def CreateBot():
 
 ################################################################
 
-class ClosestNpcFilter(IShipFilter):
+class ClosestShipFilter(IShipFilter):
+    bot = None
     def isOk(self, ship):
-        return ship.isNpc
+        return (ship.isNpc or ship.isEnemy) and ship.calcDistance(bot.new_map.hero.ship) < 800
 
-FILTER_NPC = ClosestNpcFilter()
+FILTER_SHIP = ClosestNpcFilter()
 
 class AutoSelectBot(base.BotBase):
     def __init__(self):
         base.BotBase.__init__(self, 'autoSelect')
-
+        FILTER_SHIP.bot = self
     def onBotLoopStart(self):
         print("AutoSelect loaded.");
 
-    def onShipListUpdate(self):
-        ship = GetClosestShip(self.new_map.hero.ship, self.new_map.ships, FILTER_NPC);
-        if ship is None or (not ship.isNpc and not ship.isEnemy):
+    def onTick(self):
+        if self._wait_to_select or self.new_map.hero.selectedShip is not None:
             return
-        if ship.calcDistance(self.new_map.hero.ship) < 800 and (self.new_map.hero.ship.target <= 0 or self.new_map.ships[GetShipByUid(self.new_map.ships, self.new_map.hero.ship.target)].calcDistance(self.new_map.hero.ship) > 600):
-            print("Select: " + ship.toString(), "(", ship.x, "|", ship.y, ")")
-            self.acts.selectShip(ship)
+        ship = GetClosestShip(self.new_map.hero.ship, self.new_map.ships, FILTER_SHIP);
+        if ship is None:
+            return
+        self.selectShip(ship)

@@ -1,4 +1,5 @@
 import json
+import random
 from botapi import *
 
 ##### DO NOT CHANGE THIS FILE             #####
@@ -17,11 +18,9 @@ def is_ps():
 
 def SetGame(game):
     global GAME
-    GAME = game
-    
     global BOTS
+    GAME = game
     BOTS = []
-    return
 
 def AddBot(bot):
     print("Add bot ", bot)
@@ -76,31 +75,67 @@ class BotBase:
     old_map = None
     new_map = None
     acts = None
+
     _base_name = ""
-    _cfg = {}
     def __init__(self, base_name):
         self._base_name = base_name
 
+    _cfg = {}
     def updateConfig(self):
         conf = "scripts/" + self._base_name + "/config.json"
         try:
             with open(conf, "r") as config_raw:
-                self._cfg = json.load(config_raw)
+                cfg = json.load(config_raw)
+            self._cfg = cfg
         except IOError:
             print("Warning: No config file found (" + conf + ")")
             return
 
+    _wait_to_start_moving = False
+    _wait_to_stop_moving = False
+    def moveTo(self, p):
+        self.acts.moveTo(p)
+        self._wait_to_start_moving = True
+        self._wait_to_stop_moving = True
+    def randomMove(self):
+        x, y = random.randint(100, self.new_map.map.width - 200), random.randint(100, self.new_map.map.height - 200)
+        print("Randomly moving to", x, y)
+        self.acts.moveTo(x, y)
+        self._wait_to_start_moving = True
+    def collectBox(self, box):
+        print("Collect Box: " + box.toString())
+        self.acts.collectBox(box)
+        self._wait_to_start_moving = True
+        self._wait_to_stop_moving = True
+
+    _wait_to_select = False
+    def selectShip(self, ship):
+        print("Select ship: " + ship.toString())
+        self.acts.selectShip(ship)
+        self._wait_to_select = True
+    def attackShip(self, ship):
+        print("Attack ship: " + ship.toString())
+        self.acts.attackShip(ship)
+
+    def onHeroTargetUpdate(self):
+        self._wait_to_select = False
+    def onSelectShipFailed(self):
+        self._wait_to_select = False
+    def onHeroStartsMoving(self):
+        self._wait_to_start_moving = False
+    def onHeroStopsMoving(self):
+        self._wait_to_start_moving = False
+        self._wait_to_stop_moving = False
+
+    def onTick(self):
+        return
     def onHeroUpdate(self):
         return
     def onBotLoopStart(self):
         return
-    def onTick(self):
-        return
     def onMapUpdate(self):
         return
     def onWalletUpdate(self):
-        return
-    def onHeroTargetUpdate(self):
         return
     def onShipListUpdate(self):
         return
@@ -109,10 +144,4 @@ class BotBase:
     def onDeath(self):
         return
     def onHeroEntered(self):
-        return
-    def onHeroStartsMoving(self):
-        return
-    def onHeroStopsMoving(self):
-        return
-    def onSelectShipFailed(self):
         return
