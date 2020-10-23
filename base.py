@@ -7,6 +7,7 @@ from botapi import *
 
 BOTS = []
 GAME = 0 # 1=DO, 2=SF, 3=PS
+CFG = {}
 
 def is_do():
     return GAME == 1
@@ -19,8 +20,20 @@ def is_ps():
 def SetGame(game):
     global GAME
     global BOTS
+    global CFG
     GAME = game
     BOTS = []
+    CFG = {}
+
+    # import main config
+    conf = "config.json"
+    try:
+        with open(conf, "r") as config_raw:
+            CFG = json.load(config_raw)
+            print("Main config file version " + str(CFG['version']))
+    except IOError:
+        print("Error: Main config file missing  (" + conf + ")")
+
 
 def AddBot(bot):
     print("Add bot ", bot)

@@ -24,8 +24,8 @@ class NpcKillBot(base.BotBase):
         base.BotBase.__init__(self, 'npckill')
 
     def selectShip(self, ship):
-        if 'npcList' in self._cfg:
-            want_ammo, want_range = next((x['ammo'], x['range']) for x in self._cfg['npcList'] if x['name'] == ship.name)
+        if 'npcList' in base.CFG:
+            want_ammo, want_range = next((x['ammo'], x['range']) for x in base.CFG['npcList'] if x['name'] == ship.name)
             if want_ammo > 0:
                 print("Switching ammo to", want_ammo,"and range to", want_range)
                 self.acts.sendKeys(str(want_ammo))
@@ -35,8 +35,8 @@ class NpcKillBot(base.BotBase):
         base.BotBase.selectShip(self, ship)
 
     def onBotLoopStart(self):
-        if 'npcList' in self._cfg:
-            FILTER_NPC.npc_list = self._cfg['npcList']
+        if 'npcList' in base.CFG:
+            FILTER_NPC.npc_list = base.CFG['npcList']
         print("Simple NPC killer loaded.")
 
     def onTick(self):

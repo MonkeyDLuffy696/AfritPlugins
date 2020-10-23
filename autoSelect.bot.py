@@ -10,9 +10,9 @@ def CreateBot():
 class ClosestShipFilter(IShipFilter):
     bot = None
     def isOk(self, ship):
-        return (ship.isNpc or ship.isEnemy) and ship.calcDistance(bot.new_map.hero.ship) < 800
+        return (ship.isNpc or ship.isEnemy) and ship.calcDistance(self.bot.new_map.hero.ship) < 800
 
-FILTER_SHIP = ClosestNpcFilter()
+FILTER_SHIP = ClosestShipFilter()
 
 class AutoSelectBot(base.BotBase):
     def __init__(self):
